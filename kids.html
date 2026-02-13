@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>One more question 😌</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <img class="gif" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Cute gif" />
+    <h1>Okay… one more question 😌</h1>
+    <p class="hint">How many kids are we having? 👶😂</p>
+
+    <div class="btn-row">
+      <button class="btn no kid" data-kids="0">0 (We are free 😂)</button>
+      <button class="btn kid yes" data-kids="1">1 👶</button>
+      <button class="btn kid yes" data-kids="2">2 👶👶</button>
+      <button class="btn kid yes" data-kids="3">3+ (You’re crazy 😭)</button>
+    </div>
+
+    <p class="msg" id="kidsMsg"></p>
+  </main>
+
+  <script>
+    const kidsMsg = document.getElementById("kidsMsg");
+    document.querySelectorAll(".kid").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const kids = btn.dataset.kids;
+        kidsMsg.textContent = `Noted 😌 ${kids} kid(s). Next… date plan time 💘`;
+        setTimeout(() => {
+          window.location.href = `plan.html?kids=${encodeURIComponent(kids)}`;
+        }, 700);
+      });
+    });
+  </script>
+</body>
+</html>
