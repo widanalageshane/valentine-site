@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Date plan 💘</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <img class="gif" id="planGif" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="Date gif" />
+    <h1>Date plan time 💖</h1>
+    <p class="hint">Pick the plan + time (no backing out now 😌)</p>
+
+    <h3 style="margin:14px 0 8px;">Choose the plan</h3>
+    <div class="btn-row" style="margin-bottom:10px;">
+      <button class="btn plan yes" data-plan="coffee + walk ☕️🚶">Coffee + Walk</button>
+      <button class="btn plan yes" data-plan="dinner date 🍽️✨">Dinner Date</button>
+      <button class="btn plan yes" data-plan="movie night 🎬🍿">Movie Night</button>
+      <button class="btn plan yes" data-plan="surprise date 😏🎁">Surprise</button>
+    </div>
+
+    <h3 style="margin:14px 0 8px;">Choose the time</h3>
+    <div class="btn-row">
+      <button class="btn time no" data-time="6:00 PM">6:00 PM</button>
+      <button class="btn time no" data-time="7:00 PM">7:00 PM</button>
+      <button class="btn time no" data-time="8:00 PM">8:00 PM</button>
+      <button class="btn time no" data-time="Anytime you want 😌">Anytime</button>
+    </div>
+
+    <p class="msg" id="planMsg"></p>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const kids = params.get("kids") || "??";
+
+    let selectedPlan = null;
+    let selectedTime = null;
+
+    const planMsg = document.getElementById("planMsg");
+    const planGif = document.getElementById("planGif");
+
+    const gifs = {
+      "coffee + walk ☕️🚶": "https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif",
+      "dinner date 🍽️✨": "https://media.giphy.com/media/l0MYC0LajbaPoEADu/giphy.gif",
+      "movie night 🎬🍿": "https://media.giphy.com/media/3o7qE1YN7aBOFPRw8E/giphy.gif",
+      "surprise date 😏🎁": "https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif"
+    };
+
+    function maybeGoFinal() {
+      if (selectedPlan && selectedTime) {
+        planMsg.textContent = "Perfect 😎 locking it in…";
+        setTimeout(() => {
+          window.location.href =
+            `yes.html?kids=${encodeURIComponent(kids)}&plan=${encodeURIComponent(selectedPlan)}&time=${encodeURIComponent(selectedTime)}`;
+        }, 700);
+      }
+    }
+
+    document.querySelectorAll(".plan").forEach(btn => {
+      btn.addEventListener("click", () => {
+        selectedPlan = btn.dataset.plan;
+        planMsg.textContent = `Plan: ${selectedPlan}. Now choose a time 💘`;
+        if (gifs[selectedPlan]) planGif.src = gifs[selectedPlan];
+        maybeGoFinal();
+      });
+    });
+
+    document.querySelectorAll(".time").forEach(btn => {
+      btn.addEventListener("click", () => {
+        selectedTime = btn.dataset.time;
+        planMsg.textContent = `Time: ${selectedTime}. Now choose a plan 💘`;
+        maybeGoFinal();
+      });
+    });
+  </script>
+</body>
+</html>
