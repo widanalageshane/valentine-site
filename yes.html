@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>YAY 💖</title>
+  <title>Locked In 💖</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="card">
     <img class="gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Celebration gif" />
     <h1>YAYYY!! 💘</h1>
-    <p class="hint">Okay then… date plan time 😎</p>
+    <p class="hint">Date is confirmed 😎</p>
+    <p class="msg" id="finalMsg"></p>
   </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const kids = params.get("kids") || "??";
+    const plan = params.get("plan") || "a surprise 😌";
+    const time = params.get("time") || "soon";
+
+    document.getElementById("finalMsg").textContent =
+      `So… ${kids} kid(s), ${plan}, at ${time}. Deal? 😏💖`;
+  </script>
 </body>
 </html>
